@@ -3,10 +3,6 @@ import {FormGroup,FormBuilder,Validators} from '@angular/forms'
 import {Router} from '@angular/router';
 import {UserService} from '../user.service'
 import { User } from '../user';
-
-
-
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,10 +11,11 @@ import { User } from '../user';
 })
 export class LoginComponent implements OnInit {
   loginform:FormGroup;
+  head:string='Login';
   user:User[];
   constructor(private formBuilder:FormBuilder,private router:Router,private userservice:UserService) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.loginform=this.formBuilder.group({
       username:['',Validators.required],
       password:['',Validators.required]
@@ -29,9 +26,6 @@ export class LoginComponent implements OnInit {
   login=function(){
     debugger;
     let isValid:boolean=false;
-    // let userData:number=this.user.map(data=>{
-    //   debugger;
-    //   return (data.username===this.loginform.value.username&&data.password===this.loginform.value.password)});
     this.user.forEach(element => {
       if(element.username===this.loginform.value.username && element.password===this.loginform.value.password)
       {
@@ -41,6 +35,8 @@ export class LoginComponent implements OnInit {
     if(this.isValid){
           this.router.navigate(["/whiteboard"]);
     }
+    else{
+      alert("Invalid username or password.");
+    }
   }
-
 }

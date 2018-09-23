@@ -4,8 +4,6 @@ var path=require('path');
 var cors=require('cors');
 var bodyparser=require('body-parser');
 
-//var whiteboard=require('./routes/whiteboard');
-
 var app=express();
 var port=3000;
 
