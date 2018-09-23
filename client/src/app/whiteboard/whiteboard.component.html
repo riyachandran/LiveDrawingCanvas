@@ -1,0 +1,20 @@
+
+<div #canvasDiv (mousedown)="mousedown($event)" (mousemove)="mousemove($event)" (mouseup)="mouseup($event)" (mouseleave)="mouseleave($event)"></div>
+
+<div class="sidenav">
+  <ul>
+      <button (click)="clear()">Clear</button>
+      <button (click)="save()">Save</button>
+    
+        <button (click)="erase()">Eraser</button>
+        <button (click)="pen($event)">Pen</button>
+  
+       <!-- <label>Color:</label>
+        <button (click)="color(Purple)">Purple</button> -->
+    
+    <button (click)="line($event)">Line</button>
+    <button (click)="circle($event)">Circle</button>
+    <button (click)="square($event)">Square</button>
+  </ul>
+  
+</div>

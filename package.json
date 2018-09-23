@@ -1,0 +1,21 @@
+{
+  "name": "livedrawingcanvas",
+  "version": "1.0.0",
+  "description": "live drawing canvas",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/cli": "^6.2.2",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "mongojs": "^2.6.0",
+    "mongoose": "^5.2.16",
+    "nodemon": "^1.18.4"
+  }
+}
