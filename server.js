@@ -5,6 +5,18 @@ var cors=require('cors');
 var bodyparser=require('body-parser');
 
 var app=express();
+var http=require("http").Server(app);
+var io=require('socket.io').listen(http);
+
+io.on("connection",function(socket){
+    socket.on("square",function(data){
+        socket.broacast.emit("square",data);
+    });
+    socket.on("draw begin path",function(){
+        socket.broacast.emit("draw begin path");
+    })
+})
+
 var port=3000;
 
 //connect to mongodb
@@ -38,6 +50,7 @@ app.use(bodyparser.urlencoded({extended:false}));
 
 var route=require('./routes/route');
 app.use('/api',route);
-app.listen(port,function(){
-    console.log('Server started on port '+port);    
+http.listen(port,function(){
+    console.log('Server started on port '+port);   
+    app.get('env') ;
 });

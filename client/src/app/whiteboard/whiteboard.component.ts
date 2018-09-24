@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-whiteboard',
@@ -31,10 +32,17 @@ export class WhiteboardComponent implements OnInit {
   lineWidth:number;
   canvas:any;
   welcomeTitle:string='Welcome';
+  socketEvents:any;
+  socket:any;
 
   constructor() { }
 
-  ngOnInit() {       
+  ngOnInit() { 
+    this.socket=io('http://localhost:3000',{transports:['xhr-polling']});
+    this.socketEvents={
+      DRAW:"draw",
+      DRAWBEGINPATH:"draw begin path"
+    }      
     this.last_mousex = this.last_mousey = 0;
     this.mousex = this.mousey = this.startX=this.startY=0;
     this.paint = false;
@@ -80,12 +88,20 @@ export class WhiteboardComponent implements OnInit {
         this.context.strokeStyle = this.curColor;
         this.context.lineWidth = 1;
         //Square
-          if(this.shape=='square'){   
-          var width = this.mousex-this.last_mousex;
-          var height = this.mousey-this.last_mousey;
-          this.context.rect(this.last_mousex,this.last_mousey,width,height);
+          if(this.shape=='square'){ 
+            this.socket.emit("square",{
+              x:this.mousex,
+              y:this.mousey,
+              color:this.curColor,
+              thickness:1
+            })
+            //this.socket.on('square',(x,y,color,thickness)=>{  
+              var width = this.mousex-this.last_mousex;
+              var height = this.mousey-this.last_mousey;
+              this.context.rect(this.last_mousex,this.last_mousey,width,height);
+           // });
           }
-          
+                    
           //Line
           if(this.shape=='line'){
           this.context.moveTo(this.last_mousex,this.last_mousey);
@@ -101,6 +117,7 @@ export class WhiteboardComponent implements OnInit {
           //this.addTriangle(this.mousex, this.mousey);        
           
           this.context.stroke();
+          
         }
       }
   });
