@@ -1,0 +1,18 @@
+<h3>{{welcomeTitle}}</h3>
+<div #canvasDiv (mousedown)="mousedown($event)" (mousemove)="mousemove($event)" (mouseup)="mouseup($event)" (mouseleave)="mouseleave($event)"></div>
+
+<div class="sidenav">
+  <table>
+  <tr>
+    <td><button (click)="clear()">Clear</button></td>
+      <td><button (click)="erase()">Eraser</button></td></tr>
+      <tr>
+        <td><button (click)="pen($event)">Pen</button></td>    
+        <td><button (click)="line($event)">Line</button></td></tr>
+    <tr>
+      <td><button (click)="circle($event)">Circle</button></td>
+      <td><button (click)="square($event)">Square</button></td>
+    </tr>
+  </table>
+  
+</div>
